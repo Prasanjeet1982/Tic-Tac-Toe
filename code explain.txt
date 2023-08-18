@@ -1,0 +1,37 @@
+Let's break down the code step by step and explain its different parts:
+
+1. **Importing Dependencies:**
+   - The code begins by importing the necessary dependencies: `FastAPI` from the FastAPI framework and `HTTPException` for handling HTTP exceptions.
+   - `app = FastAPI()` creates an instance of the FastAPI application.
+
+2. **Initializing the Board and Current Player:**
+   - The `board` variable is initialized as a 2D list (3x3 grid) with empty spaces to represent the Tic-Tac-Toe board.
+   - `current_player` starts as "X" and will alternate between "X" and "O" as players take turns.
+
+3. **`print_board` Function:**
+   - This function takes the `board` as input and returns a formatted string representation of the board.
+   - It uses list comprehensions to join rows and add separator lines between rows.
+
+4. **`check_win` Function:**
+   - This function checks if a player has won the game.
+   - It checks rows, columns, and diagonals for three consecutive marks of the same player.
+
+5. **Root Endpoint (`/`):**
+   - This endpoint responds to a GET request at the root URL (`/`) and returns a welcome message in a JSON format.
+
+6. **Move Endpoint (`/move/{row}/{col}`):**
+   - This endpoint responds to a POST request at the specified URL pattern (`/move/{row}/{col}`) where `{row}` and `{col}` are the row and column indices.
+   - The function `make_move` is called when this endpoint is accessed.
+   - It validates the input row and column indices. If they are out of bounds or the cell is already taken, an HTTPException is raised.
+   - If the move is valid, the current player's mark ("X" or "O") is placed on the board.
+   - The function checks if the current player has won or if the game has resulted in a draw. It returns a message indicating the result of the move.
+
+7. **Running the Application:**
+   - The code block under `if __name__ == "__main__":` is used to run the FastAPI application using the Uvicorn server.
+   - The application will be accessible at `http://localhost:8000`.
+
+8. **Running the Application:**
+   - To run the application, execute `uvicorn main:app --reload` in the terminal. This starts the FastAPI application and serves it using the Uvicorn server.
+   - You can access the API at `http://localhost:8000`.
+
+Overall, this code creates a basic Tic-Tac-Toe game using the FastAPI framework. It defines endpoints to make moves and check for the game's status. The game is played by making POST requests to the `/move/{row}/{col}` endpoint, and the game's state is maintained using the `board` and `current_player` variables.
